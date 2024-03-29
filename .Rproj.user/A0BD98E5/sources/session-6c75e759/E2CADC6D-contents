@@ -1,0 +1,14 @@
+#include <RcppArmadillo.h>
+
+// [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::export]]
+Rcpp::List matrixEigen(const arma::mat& A) {
+  arma::vec eigval;
+  arma::mat eigvec;
+  arma::eig_sym(eigval, eigvec, A);
+  arma::uvec indices = sort_index(eigval, "descend");
+  eigval = eigval(indices);
+  eigvec = eigvec.cols(indices);
+  return Rcpp::List::create(Rcpp::Named("values") = eigval,
+                            Rcpp::Named("vectors") = eigvec);
+}

@@ -1,0 +1,14 @@
+#include <RcppArmadillo.h>
+
+// [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::export]]
+arma::mat matrixCor(const arma::mat& A) {
+  int n = A.n_rows;
+  arma::mat B = A.each_row() - mean(A, 0);
+  arma::mat S = trans(B) * B / (n - 1);
+  arma::vec D = 1.0 / sqrt(S.diag());
+  D.replace(arma::datum::nan, 0);
+  arma::mat R = S.each_col() % D;
+  R = R.each_row() % trans(D);
+  return R;
+}

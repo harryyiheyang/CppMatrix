@@ -1,0 +1,3 @@
+useDynLib("CppMatrix", .registration = TRUE)
+importFrom(Rcpp, sourceCpp)
+exportPattern("^[[:alpha:]]+$")

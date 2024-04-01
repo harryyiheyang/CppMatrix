@@ -699,7 +699,7 @@
 #endif
 
 #ifndef __VERSION__
-# define __VERSION__ "12.2.0"
+# define __VERSION__ "12.3.0"
 #endif
 
 #ifndef __UINT64_C
@@ -1455,7 +1455,7 @@
 #endif
 
 #ifndef __GNUC_MINOR__
-# define __GNUC_MINOR__ 2
+# define __GNUC_MINOR__ 3
 #endif
 
 #ifndef __INT_FAST16_WIDTH__

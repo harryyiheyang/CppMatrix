@@ -25,3 +25,11 @@ matrixKronecker <- function(A, B) {
     .Call(`_CppMatrix_matrixKronecker`, A, B)
 }
 
+matrixListProduct <- function(matrixList) {
+    .Call(`_CppMatrix_matrixListProduct`, matrixList)
+}
+
+matrixGeneralizedInverse <- function(A, tol = 5e-16) {
+    .Call(`_CppMatrix_matrixGeneralizedInverse`, A, tol)
+}
+

@@ -51,3 +51,20 @@ arma::mat matrixKronecker(const arma::mat& A, const arma::mat& B) {
   }
   return K;
 }
+
+// [[Rcpp::export]]
+arma::mat matrixListProduct(const Rcpp::List& matrixList) {
+  int n = matrixList.size();
+  arma::mat result = Rcpp::as<arma::mat>(matrixList[0]);
+
+  for (int i = 1; i < n; i++) {
+    result *= Rcpp::as<arma::mat>(matrixList[i]);
+  }
+
+  return result;
+}
+
+// [[Rcpp::export]]
+arma::mat matrixGeneralizedInverse(const arma::mat& A, double tol = 5e-16) {
+  return arma::pinv(A, tol);
+}

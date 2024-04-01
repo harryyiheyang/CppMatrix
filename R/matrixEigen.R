@@ -6,5 +6,7 @@
 #' @return A list containing the eigenvalues and eigenvectors of matrix A.
 #' @export
 matrixEigen <- function(A) {
-  invisible(.Call(`_CppMatrix_matrixEigen`, A))
+  fit <- .Call(`_CppMatrix_matrixEigen`, A)
+  fit$values <- c(fit$values)
+  return(fit)
 }

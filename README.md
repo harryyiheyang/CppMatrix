@@ -15,7 +15,9 @@ devtools::install_github("harryyiheyang/CppMatrix")
 The package includes the following matrix operation functions:
 
 - matrixInverse: Computes the inverse of a square matrix.
+- matrixGeneralizedInverse: Computes the generalized inverse of a square matrix.
 - matrixMultiply: Performs matrix multiplication.
+- matrixListMultiply: Perform matrix multiplication on a list of matrices sequentially.
 - matrixVectorMultiply: Performs matrix-vector multiplication.
 - matrixCor: Computes the sample correlation matrix from a data matrix.
 - matrixEigen: Computes the eigenvalue decomposition of a symmetric matrix.

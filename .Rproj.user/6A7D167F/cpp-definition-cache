@@ -1,14 +1,14 @@
 [
     {
-        "file": "C:/Users/12163/Downloads/CppMatrix/src/cppmatrix.cpp",
-        "file_last_write": 1711684806.0,
+        "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
+        "file_last_write": 1711940819.0,
         "definitions": [
             {
                 "usr": "c:@F@matrixInverse#&1$@N@arma@S@Mat>#d#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "matrixInverse(const arma::mat &)",
-                "file": "C:/Users/12163/Downloads/CppMatrix/src/cppmatrix.cpp",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
                 "line": 6,
                 "column": 11,
                 "hidden": false
@@ -18,7 +18,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "matrixMultiply(const arma::mat &, const arma::mat &)",
-                "file": "C:/Users/12163/Downloads/CppMatrix/src/cppmatrix.cpp",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
                 "line": 11,
                 "column": 11,
                 "hidden": false
@@ -28,7 +28,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "matrixVectorMultiply(const arma::mat &, const arma::vec &)",
-                "file": "C:/Users/12163/Downloads/CppMatrix/src/cppmatrix.cpp",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
                 "line": 16,
                 "column": 11,
                 "hidden": false
@@ -38,7 +38,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "matrixCor(const arma::mat &)",
-                "file": "C:/Users/12163/Downloads/CppMatrix/src/cppmatrix.cpp",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
                 "line": 21,
                 "column": 11,
                 "hidden": false
@@ -48,7 +48,7 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "matrixEigen(const arma::mat &)",
-                "file": "C:/Users/12163/Downloads/CppMatrix/src/cppmatrix.cpp",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
                 "line": 33,
                 "column": 12,
                 "hidden": false
@@ -58,8 +58,28 @@
                 "kind": 6,
                 "parent_name": "",
                 "name": "matrixKronecker(const arma::mat &, const arma::mat &)",
-                "file": "C:/Users/12163/Downloads/CppMatrix/src/cppmatrix.cpp",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
                 "line": 45,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@matrixListProduct#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "matrixListProduct(const Rcpp::List &)",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
+                "line": 56,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@matrixGeneralizedInverse#&1$@N@arma@S@Mat>#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "matrixGeneralizedInverse(const arma::mat &, double)",
+                "file": "C:/Users/12163/Desktop/CppMatrix/src/cppmatrix.cpp",
+                "line": 68,
                 "column": 11,
                 "hidden": false
             }

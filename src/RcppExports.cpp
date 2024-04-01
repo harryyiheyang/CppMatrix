@@ -80,6 +80,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// matrixListProduct
+arma::mat matrixListProduct(const Rcpp::List& matrixList);
+RcppExport SEXP _CppMatrix_matrixListProduct(SEXP matrixListSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type matrixList(matrixListSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixListProduct(matrixList));
+    return rcpp_result_gen;
+END_RCPP
+}
+// matrixGeneralizedInverse
+arma::mat matrixGeneralizedInverse(const arma::mat& A, double tol);
+RcppExport SEXP _CppMatrix_matrixGeneralizedInverse(SEXP ASEXP, SEXP tolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixGeneralizedInverse(A, tol));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_CppMatrix_matrixInverse", (DL_FUNC) &_CppMatrix_matrixInverse, 1},
@@ -88,6 +111,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_CppMatrix_matrixCor", (DL_FUNC) &_CppMatrix_matrixCor, 1},
     {"_CppMatrix_matrixEigen", (DL_FUNC) &_CppMatrix_matrixEigen, 1},
     {"_CppMatrix_matrixKronecker", (DL_FUNC) &_CppMatrix_matrixKronecker, 2},
+    {"_CppMatrix_matrixListProduct", (DL_FUNC) &_CppMatrix_matrixListProduct, 1},
+    {"_CppMatrix_matrixGeneralizedInverse", (DL_FUNC) &_CppMatrix_matrixGeneralizedInverse, 2},
     {NULL, NULL, 0}
 };
 

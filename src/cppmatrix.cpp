@@ -68,3 +68,38 @@ arma::mat matrixListProduct(const Rcpp::List& matrixList) {
 arma::mat matrixGeneralizedInverse(const arma::mat& A, double tol = 5e-16) {
   return arma::pinv(A, tol);
 }
+
+// [[Rcpp::export]]
+arma::mat matrixSylvesterEigen(const arma::mat& UA,
+                         const arma::vec& DA,
+                         const arma::mat& UB,
+                         const arma::vec& DB,
+                         const arma::mat& C)
+{
+arma::mat tC = UA.t() * C * UB;
+
+arma::mat tX(tC.n_rows, tC.n_cols, arma::fill::none);
+for (size_t i = 0; i < tC.n_rows; ++i) {
+  for (size_t j = 0; j < tC.n_cols; ++j) {
+    tX(i, j) = tC(i, j) / (DA(i) + DB(j));
+  }
+}
+
+arma::mat X = UA * tX * UB.t();
+return X;
+}
+
+// [[Rcpp::export]]
+arma::mat matrixSylvester(const arma::mat& A,
+                        const arma::mat& B,
+                        const arma::mat& C)
+{
+  arma::mat X;
+  bool success = arma::sylvester(X, A, B, -C);
+
+  if(!success) {
+    Rcpp::stop("Sylvester equation solver did not converge or was not successful.");
+  }
+
+  return X;
+}

@@ -103,6 +103,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// matrixSylvesterEigen
+arma::mat matrixSylvesterEigen(const arma::mat& UA, const arma::vec& DA, const arma::mat& UB, const arma::vec& DB, const arma::mat& C);
+RcppExport SEXP _CppMatrix_matrixSylvesterEigen(SEXP UASEXP, SEXP DASEXP, SEXP UBSEXP, SEXP DBSEXP, SEXP CSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type UA(UASEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type DA(DASEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type UB(UBSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type DB(DBSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type C(CSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixSylvesterEigen(UA, DA, UB, DB, C));
+    return rcpp_result_gen;
+END_RCPP
+}
+// matrixSylvester
+arma::mat matrixSylvester(const arma::mat& A, const arma::mat& B, const arma::mat& C);
+RcppExport SEXP _CppMatrix_matrixSylvester(SEXP ASEXP, SEXP BSEXP, SEXP CSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type C(CSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixSylvester(A, B, C));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_CppMatrix_matrixInverse", (DL_FUNC) &_CppMatrix_matrixInverse, 1},
@@ -113,6 +141,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_CppMatrix_matrixKronecker", (DL_FUNC) &_CppMatrix_matrixKronecker, 2},
     {"_CppMatrix_matrixListProduct", (DL_FUNC) &_CppMatrix_matrixListProduct, 1},
     {"_CppMatrix_matrixGeneralizedInverse", (DL_FUNC) &_CppMatrix_matrixGeneralizedInverse, 2},
+    {"_CppMatrix_matrixSylvesterEigen", (DL_FUNC) &_CppMatrix_matrixSylvesterEigen, 5},
+    {"_CppMatrix_matrixSylvester", (DL_FUNC) &_CppMatrix_matrixSylvester, 3},
     {NULL, NULL, 0}
 };
 

@@ -22,6 +22,8 @@ The package includes the following matrix operation functions:
 - matrixCor: Computes the sample correlation matrix from a data matrix.
 - matrixEigen: Computes the eigenvalue decomposition of a symmetric matrix.
 - matrixKronecker: Computes the Kronecker product of two matrices.
+- matrixSylvester.R: Solve the Sylvester equation: AX+XB-C=0
+- matrixSylvesterEigen.R: Solve the Sylvester equation: AX+XB-C=0 but use the eigenvalue decomposition of A and B to reduce computational cost.
 
 ## Performance
 

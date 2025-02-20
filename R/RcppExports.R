@@ -33,3 +33,11 @@ matrixGeneralizedInverse <- function(A, tol = 5e-16) {
     .Call(`_CppMatrix_matrixGeneralizedInverse`, A, tol)
 }
 
+matrixSylvesterEigen <- function(UA, DA, UB, DB, C) {
+    .Call(`_CppMatrix_matrixSylvesterEigen`, UA, DA, UB, DB, C)
+}
+
+matrixSylvester <- function(A, B, C) {
+    .Call(`_CppMatrix_matrixSylvester`, A, B, C)
+}
+

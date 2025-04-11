@@ -6,5 +6,5 @@
 #' @return The product of the input matrices.
 #' @export
 matrixListProduct <- function(matrixList) {
-  invisible(.Call(`_CppMatrix_matrixListProduct`, matrixList))
+  return(invisible(.Call(`_CppMatrix_matrixListProduct`, matrixList)))
 }

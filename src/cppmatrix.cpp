@@ -43,13 +43,7 @@ Rcpp::List matrixEigen(const arma::mat& A) {
 
 // [[Rcpp::export]]
 arma::mat matrixKronecker(const arma::mat& A, const arma::mat& B) {
-  arma::mat K(A.n_rows * B.n_rows, A.n_cols * B.n_cols);
-  for (std::size_t i = 0; i < A.n_rows; ++i) {
-    for (std::size_t j = 0; j < A.n_cols; ++j) {
-      K.submat(i * B.n_rows, j * B.n_cols, (i + 1) * B.n_rows - 1, (j + 1) * B.n_cols - 1) = A(i, j) * B;
-    }
-  }
-  return K;
+  return arma::kron(A, B);
 }
 
 // [[Rcpp::export]]

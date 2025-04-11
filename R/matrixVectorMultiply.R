@@ -8,5 +8,5 @@
 #' @export
 matrixVectorMultiply <- function(A, b) {
   a <- .Call(`_CppMatrix_matrixVectorMultiply`, A, b)
-  return(c(a))
+  return(as.vector(a))
 }

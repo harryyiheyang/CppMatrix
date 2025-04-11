@@ -7,5 +7,5 @@
 #' @return The Kronecker product of matrices A and B.
 #' @export
 matrixKronecker <- function(A, B) {
-  invisible(.Call(`_CppMatrix_matrixKronecker`, A, B))
+  return(invisible(.Call(`_CppMatrix_matrixKronecker`, A, B)))
 }

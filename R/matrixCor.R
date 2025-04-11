@@ -6,5 +6,5 @@
 #' @return The sample correlation matrix.
 #' @export
 matrixCor <- function(A) {
-  invisible(.Call(`_CppMatrix_matrixCor`, A))
+  return(invisible(.Call(`_CppMatrix_matrixCor`, A)))
 }

@@ -7,5 +7,5 @@
 #' @return The generalized inverse of the input matrix.
 #' @export
 matrixGeneralizedInverse <- function(A, tol = 5e-16) {
-  invisible(.Call(`_CppMatrix_matrixGeneralizedInverse`, A, tol))
+  return(invisible(.Call(`_CppMatrix_matrixGeneralizedInverse`, A, tol)))
 }

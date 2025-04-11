@@ -6,5 +6,5 @@
 #' @return The inverse of matrix A.
 #' @export
 matrixInverse <- function(A) {
-  invisible(.Call(`_CppMatrix_matrixInverse`, A))
+  return(invisible(.Call(`_CppMatrix_matrixInverse`, A)))
 }

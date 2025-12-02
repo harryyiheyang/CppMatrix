@@ -131,6 +131,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// matrixSVD
+Rcpp::List matrixSVD(const arma::mat& A);
+RcppExport SEXP _CppMatrix_matrixSVD(SEXP ASEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixSVD(A));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_CppMatrix_matrixInverse", (DL_FUNC) &_CppMatrix_matrixInverse, 1},
@@ -143,6 +154,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_CppMatrix_matrixGeneralizedInverse", (DL_FUNC) &_CppMatrix_matrixGeneralizedInverse, 2},
     {"_CppMatrix_matrixSylvesterEigen", (DL_FUNC) &_CppMatrix_matrixSylvesterEigen, 5},
     {"_CppMatrix_matrixSylvester", (DL_FUNC) &_CppMatrix_matrixSylvester, 3},
+    {"_CppMatrix_matrixSVD", (DL_FUNC) &_CppMatrix_matrixSVD, 1},
     {NULL, NULL, 0}
 };
 

@@ -41,3 +41,7 @@ matrixSylvester <- function(A, B, C) {
     .Call(`_CppMatrix_matrixSylvester`, A, B, C)
 }
 
+matrixSVD <- function(A) {
+    .Call(`_CppMatrix_matrixSVD`, A)
+}
+

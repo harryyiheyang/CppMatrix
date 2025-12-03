@@ -103,22 +103,15 @@ Rcpp::List matrixSVD(const arma::mat& A) {
   arma::mat U, V;
   arma::vec s;
 
-  bool use_econ = (A.n_rows * A.n_cols > 100000000);
-
-  bool success;
-  if (use_econ) {
-    success = arma::svd_econ(U, s, V, A, "both");
-  } else {
-    success = arma::svd(U, s, V, A);
-  }
+  bool success = arma::svd_econ(U, s, V, A, "both");
 
   if (!success) {
-    Rcpp::stop("SVD failed.");
+    Rcpp::stop("SVD computation failed.");
   }
 
   return Rcpp::List::create(
-    Rcpp::Named("d") = s,
-    Rcpp::Named("u") = U,
-    Rcpp::Named("v") = V
+    Rcpp::Named("d") = s,   //
+    Rcpp::Named("u") = U,   // U: m × min(m,p)
+    Rcpp::Named("v") = V    // V: p × min(m,p)
   );
 }

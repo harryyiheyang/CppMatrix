@@ -11,101 +11,103 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// matrixInverse
-arma::mat matrixInverse(const arma::mat& A);
-RcppExport SEXP _CppMatrix_matrixInverse(SEXP ASEXP) {
+// matrixInverse_cpp
+arma::mat matrixInverse_cpp(const arma::mat& A);
+RcppExport SEXP _CppMatrix_matrixInverse_cpp(SEXP ASEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixInverse(A));
+    rcpp_result_gen = Rcpp::wrap(matrixInverse_cpp(A));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixMultiply
-arma::mat matrixMultiply(const arma::mat& A, const arma::mat& B);
-RcppExport SEXP _CppMatrix_matrixMultiply(SEXP ASEXP, SEXP BSEXP) {
+// matrixMultiply_cpp
+arma::mat matrixMultiply_cpp(const arma::mat& A, const arma::mat& B, bool transA, bool transB);
+RcppExport SEXP _CppMatrix_matrixMultiply_cpp(SEXP ASEXP, SEXP BSEXP, SEXP transASEXP, SEXP transBSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixMultiply(A, B));
+    Rcpp::traits::input_parameter< bool >::type transA(transASEXP);
+    Rcpp::traits::input_parameter< bool >::type transB(transBSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixMultiply_cpp(A, B, transA, transB));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixVectorMultiply
-arma::vec matrixVectorMultiply(const arma::mat& A, const arma::vec& b);
-RcppExport SEXP _CppMatrix_matrixVectorMultiply(SEXP ASEXP, SEXP bSEXP) {
+// matrixVectorMultiply_cpp
+arma::vec matrixVectorMultiply_cpp(const arma::mat& A, const arma::vec& b);
+RcppExport SEXP _CppMatrix_matrixVectorMultiply_cpp(SEXP ASEXP, SEXP bSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixVectorMultiply(A, b));
+    rcpp_result_gen = Rcpp::wrap(matrixVectorMultiply_cpp(A, b));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixCor
-arma::mat matrixCor(const arma::mat& A);
-RcppExport SEXP _CppMatrix_matrixCor(SEXP ASEXP) {
+// matrixCor_cpp
+arma::mat matrixCor_cpp(const arma::mat& A);
+RcppExport SEXP _CppMatrix_matrixCor_cpp(SEXP ASEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixCor(A));
+    rcpp_result_gen = Rcpp::wrap(matrixCor_cpp(A));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixEigen
-Rcpp::List matrixEigen(const arma::mat& A);
-RcppExport SEXP _CppMatrix_matrixEigen(SEXP ASEXP) {
+// matrixEigen_cpp
+Rcpp::List matrixEigen_cpp(const arma::mat& A);
+RcppExport SEXP _CppMatrix_matrixEigen_cpp(SEXP ASEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixEigen(A));
+    rcpp_result_gen = Rcpp::wrap(matrixEigen_cpp(A));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixKronecker
-arma::mat matrixKronecker(const arma::mat& A, const arma::mat& B);
-RcppExport SEXP _CppMatrix_matrixKronecker(SEXP ASEXP, SEXP BSEXP) {
+// matrixKronecker_cpp
+arma::mat matrixKronecker_cpp(const arma::mat& A, const arma::mat& B);
+RcppExport SEXP _CppMatrix_matrixKronecker_cpp(SEXP ASEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixKronecker(A, B));
+    rcpp_result_gen = Rcpp::wrap(matrixKronecker_cpp(A, B));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixListProduct
-arma::mat matrixListProduct(const Rcpp::List& matrixList);
-RcppExport SEXP _CppMatrix_matrixListProduct(SEXP matrixListSEXP) {
+// matrixListProduct_cpp
+arma::mat matrixListProduct_cpp(const Rcpp::List& matrixList);
+RcppExport SEXP _CppMatrix_matrixListProduct_cpp(SEXP matrixListSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::List& >::type matrixList(matrixListSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixListProduct(matrixList));
+    rcpp_result_gen = Rcpp::wrap(matrixListProduct_cpp(matrixList));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixGeneralizedInverse
-arma::mat matrixGeneralizedInverse(const arma::mat& A, double tol);
-RcppExport SEXP _CppMatrix_matrixGeneralizedInverse(SEXP ASEXP, SEXP tolSEXP) {
+// matrixGeneralizedInverse_cpp
+arma::mat matrixGeneralizedInverse_cpp(const arma::mat& A, double tol);
+RcppExport SEXP _CppMatrix_matrixGeneralizedInverse_cpp(SEXP ASEXP, SEXP tolSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
     Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixGeneralizedInverse(A, tol));
+    rcpp_result_gen = Rcpp::wrap(matrixGeneralizedInverse_cpp(A, tol));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixSylvesterEigen
-arma::mat matrixSylvesterEigen(const arma::mat& UA, const arma::vec& DA, const arma::mat& UB, const arma::vec& DB, const arma::mat& C);
-RcppExport SEXP _CppMatrix_matrixSylvesterEigen(SEXP UASEXP, SEXP DASEXP, SEXP UBSEXP, SEXP DBSEXP, SEXP CSEXP) {
+// matrixSylvesterEigen_cpp
+arma::mat matrixSylvesterEigen_cpp(const arma::mat& UA, const arma::vec& DA, const arma::mat& UB, const arma::vec& DB, const arma::mat& C);
+RcppExport SEXP _CppMatrix_matrixSylvesterEigen_cpp(SEXP UASEXP, SEXP DASEXP, SEXP UBSEXP, SEXP DBSEXP, SEXP CSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -114,47 +116,75 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::mat& >::type UB(UBSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type DB(DBSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type C(CSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixSylvesterEigen(UA, DA, UB, DB, C));
+    rcpp_result_gen = Rcpp::wrap(matrixSylvesterEigen_cpp(UA, DA, UB, DB, C));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixSylvester
-arma::mat matrixSylvester(const arma::mat& A, const arma::mat& B, const arma::mat& C);
-RcppExport SEXP _CppMatrix_matrixSylvester(SEXP ASEXP, SEXP BSEXP, SEXP CSEXP) {
+// matrixSylvester_cpp
+arma::mat matrixSylvester_cpp(const arma::mat& A, const arma::mat& B, const arma::mat& C);
+RcppExport SEXP _CppMatrix_matrixSylvester_cpp(SEXP ASEXP, SEXP BSEXP, SEXP CSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type C(CSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixSylvester(A, B, C));
+    rcpp_result_gen = Rcpp::wrap(matrixSylvester_cpp(A, B, C));
     return rcpp_result_gen;
 END_RCPP
 }
-// matrixSVD
-Rcpp::List matrixSVD(const arma::mat& A);
-RcppExport SEXP _CppMatrix_matrixSVD(SEXP ASEXP) {
+// matrixSVD_cpp
+Rcpp::List matrixSVD_cpp(const arma::mat& A);
+RcppExport SEXP _CppMatrix_matrixSVD_cpp(SEXP ASEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
-    rcpp_result_gen = Rcpp::wrap(matrixSVD(A));
+    rcpp_result_gen = Rcpp::wrap(matrixSVD_cpp(A));
+    return rcpp_result_gen;
+END_RCPP
+}
+// matrixSolveMat_cpp
+arma::mat matrixSolveMat_cpp(const arma::mat& A, const arma::mat& B);
+RcppExport SEXP _CppMatrix_matrixSolveMat_cpp(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixSolveMat_cpp(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// matrixScale_cpp
+Rcpp::List matrixScale_cpp(const arma::mat& X, bool center, bool standardized, bool robust);
+RcppExport SEXP _CppMatrix_matrixScale_cpp(SEXP XSEXP, SEXP centerSEXP, SEXP standardizedSEXP, SEXP robustSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< bool >::type center(centerSEXP);
+    Rcpp::traits::input_parameter< bool >::type standardized(standardizedSEXP);
+    Rcpp::traits::input_parameter< bool >::type robust(robustSEXP);
+    rcpp_result_gen = Rcpp::wrap(matrixScale_cpp(X, center, standardized, robust));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_CppMatrix_matrixInverse", (DL_FUNC) &_CppMatrix_matrixInverse, 1},
-    {"_CppMatrix_matrixMultiply", (DL_FUNC) &_CppMatrix_matrixMultiply, 2},
-    {"_CppMatrix_matrixVectorMultiply", (DL_FUNC) &_CppMatrix_matrixVectorMultiply, 2},
-    {"_CppMatrix_matrixCor", (DL_FUNC) &_CppMatrix_matrixCor, 1},
-    {"_CppMatrix_matrixEigen", (DL_FUNC) &_CppMatrix_matrixEigen, 1},
-    {"_CppMatrix_matrixKronecker", (DL_FUNC) &_CppMatrix_matrixKronecker, 2},
-    {"_CppMatrix_matrixListProduct", (DL_FUNC) &_CppMatrix_matrixListProduct, 1},
-    {"_CppMatrix_matrixGeneralizedInverse", (DL_FUNC) &_CppMatrix_matrixGeneralizedInverse, 2},
-    {"_CppMatrix_matrixSylvesterEigen", (DL_FUNC) &_CppMatrix_matrixSylvesterEigen, 5},
-    {"_CppMatrix_matrixSylvester", (DL_FUNC) &_CppMatrix_matrixSylvester, 3},
-    {"_CppMatrix_matrixSVD", (DL_FUNC) &_CppMatrix_matrixSVD, 1},
+    {"_CppMatrix_matrixInverse_cpp", (DL_FUNC) &_CppMatrix_matrixInverse_cpp, 1},
+    {"_CppMatrix_matrixMultiply_cpp", (DL_FUNC) &_CppMatrix_matrixMultiply_cpp, 4},
+    {"_CppMatrix_matrixVectorMultiply_cpp", (DL_FUNC) &_CppMatrix_matrixVectorMultiply_cpp, 2},
+    {"_CppMatrix_matrixCor_cpp", (DL_FUNC) &_CppMatrix_matrixCor_cpp, 1},
+    {"_CppMatrix_matrixEigen_cpp", (DL_FUNC) &_CppMatrix_matrixEigen_cpp, 1},
+    {"_CppMatrix_matrixKronecker_cpp", (DL_FUNC) &_CppMatrix_matrixKronecker_cpp, 2},
+    {"_CppMatrix_matrixListProduct_cpp", (DL_FUNC) &_CppMatrix_matrixListProduct_cpp, 1},
+    {"_CppMatrix_matrixGeneralizedInverse_cpp", (DL_FUNC) &_CppMatrix_matrixGeneralizedInverse_cpp, 2},
+    {"_CppMatrix_matrixSylvesterEigen_cpp", (DL_FUNC) &_CppMatrix_matrixSylvesterEigen_cpp, 5},
+    {"_CppMatrix_matrixSylvester_cpp", (DL_FUNC) &_CppMatrix_matrixSylvester_cpp, 3},
+    {"_CppMatrix_matrixSVD_cpp", (DL_FUNC) &_CppMatrix_matrixSVD_cpp, 1},
+    {"_CppMatrix_matrixSolveMat_cpp", (DL_FUNC) &_CppMatrix_matrixSolveMat_cpp, 2},
+    {"_CppMatrix_matrixScale_cpp", (DL_FUNC) &_CppMatrix_matrixScale_cpp, 4},
     {NULL, NULL, 0}
 };
 

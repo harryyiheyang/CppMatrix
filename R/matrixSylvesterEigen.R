@@ -10,6 +10,9 @@
 #' @return The solution matrix X.
 #' @export
 matrixSylvesterEigen <- function(UA, DA, UB, DB, C) {
-  x <- .Call(`_CppMatrix_matrixSylvesterEigen`, UA, DA, UB, DB, C)
+  UA <- .as_matrix_if_needed(UA)
+  UB <- .as_matrix_if_needed(UB)
+  C <- .as_matrix_if_needed(C)
+  x <- matrixSylvesterEigen_cpp(UA, DA, UB, DB, C)
   return(x)
 }

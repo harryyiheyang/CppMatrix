@@ -7,6 +7,7 @@
 #' @return The product of matrix A and vector b.
 #' @export
 matrixVectorMultiply <- function(A, b) {
-  a <- .Call(`_CppMatrix_matrixVectorMultiply`, A, b)
+  A <- .as_matrix_if_needed(A)
+  a <- matrixVectorMultiply_cpp(A, b)
   return(as.vector(a))
 }

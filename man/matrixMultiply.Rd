@@ -4,12 +4,16 @@
 \alias{matrixMultiply}
 \title{Matrix Multiplication}
 \usage{
-matrixMultiply(A, B)
+matrixMultiply(A, B, transA = FALSE, transB = FALSE)
 }
 \arguments{
 \item{A}{The first matrix.}
 
 \item{B}{The second matrix.}
+
+\item{transA}{Logical; if TRUE, use the transpose of A.}
+
+\item{transB}{Logical; if TRUE, use the transpose of B.}
 }
 \value{
 The product of matrices A and B.

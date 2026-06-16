@@ -6,6 +6,7 @@
 #' @return A list containing d (singular values), u (left singular vectors), and v (right singular vectors).
 #' @export
 matrixSVD <- function(A) {
-  result <- .Call(`_CppMatrix_matrixSVD`, A)
+  A <- .as_matrix_if_needed(A)
+  result <- matrixSVD_cpp(A)
   return(result)
 }

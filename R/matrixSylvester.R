@@ -7,8 +7,11 @@
 #' @param C A square matrix.
 #' @return The solution matrix X.
 #' @export
-matrixSylvesterEigen <- function(A, B, C) {
-  x <- .Call(`_CppMatrix_matrixSylvester`, A, B, C)
+matrixSylvester <- function(A, B, C) {
+  A <- .as_matrix_if_needed(A)
+  B <- .as_matrix_if_needed(B)
+  C <- .as_matrix_if_needed(C)
+  x <- matrixSylvester_cpp(A, B, C)
   return(x)
 }
 

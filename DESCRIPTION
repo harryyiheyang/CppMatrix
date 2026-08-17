@@ -6,6 +6,7 @@ Author: Yihe Yang
 Maintainer: Yihe Yang <yxy1234@case.edu>
 Description: The CppMatrixFunction package provides a collection of efficient matrix operation functions implemented using Rcpp and RcppArmadillo. These functions include matrix inversion, multiplication, matrix-vector multiplication, correlation matrix computation, eigenvalue decomposition, and Kronecker product. By leveraging the power of C++ and the Armadillo library, this package offers significant performance improvements compared to base R implementations, making it suitable for computationally intensive tasks involving large matrices.
 License: MIT + file LICENSE
+SystemRequirements: C++17
 Encoding: UTF-8
 LazyData: true
 Imports:

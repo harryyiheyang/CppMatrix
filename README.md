@@ -1,10 +1,10 @@
 # CppMatrix
 
-The `CppMatrixFunction` package provides a collection of efficient matrix operation functions implemented using Rcpp and RcppArmadillo. These functions offer significant performance improvements compared to base R implementations, making it suitable for computationally intensive tasks involving large matrices.
+The `CppMatrix` package provides a collection of efficient matrix operation functions implemented using Rcpp and RcppArmadillo. These functions offer significant performance improvements compared to base R implementations, making it suitable for computationally intensive tasks involving large matrices.
 
 ## Installation
 
-You can install the `CppMatrixFunction` package from GitHub using the `devtools` package:
+You can install the `CppMatrix` package from GitHub using the `devtools` package:
 
 ```R
 devtools::install_github("harryyiheyang/CppMatrix")

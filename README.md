@@ -22,6 +22,9 @@ The package includes the following matrix operation functions:
 - matrixSolve: Solves a linear system AX = B and always treats B as a matrix.
 - matrixScale: Centers and standardizes matrix columns, with an optional winsorized robust scale.
 - matrixCor: Computes the sample correlation matrix from a data matrix.
+- bed_cor: Computes variant correlations directly from PLINK BED files.
+- pgen_cor: Computes variant correlations directly from PLINK 2 PGEN files, with explicit ALT selection for multiallelic variants (requires `pgenlibr`).
+- pgen_cor_update: Extends an existing PGEN correlation matrix with new variants and restores chromosome-position order.
 - matrixEigen: Computes the eigenvalue decomposition of a symmetric matrix.
 - matrixSVD: Computes the singular values decomposition of a matrix.
 - matrixKronecker: Computes the Kronecker product of two matrices.
@@ -52,6 +55,25 @@ matrixScale(X)
 
 # Robust centering and winsorized standardization
 matrixScale(X, robust = TRUE)
+```
+
+For genotype files that already contain the desired variants and samples, `bed_cor(A)` returns a variant-by-variant correlation matrix. `bed_cor(A, B)` returns the correlations between variants in `A` and `B`. Each BED file needs matching `.bim` and `.fam` files, and cross-file calls require identical samples in the same order.
+
+```R
+Rkk <- Rold[keep, keep, drop = FALSE]
+Rka <- bed_cor("keep.bed", "add.bed")
+Raa <- bed_cor("add.bed")
+Rnew <- rbind(cbind(Rkk, Rka), cbind(t(Rka), Raa))
+```
+
+`pgen_cor()` requires matching `.pvar` and `.psam` files. `keep` selects samples from a sample-ID file, and `snp` selects variants by ID (use `list(A = ..., B = ...)` for a cross matrix). Founders are used, and each pair is calculated over samples with both dosages observed, matching PLINK 2 `--r-unphased`. For a multiallelic variant, supply its target ALT string in `alt_A` or `alt_B`; these can be full-file vectors, vectors aligned with selected SNPs, or named by SNP ID. Biallelic variants default to ALT1. Both axes are sorted by chromosome, position, and SNP ID. Constant variants return `NA` correlations.
+
+PLINK 2 applies special sex-aware weighting to chromosome X. For now, `pgen_cor()` reports an error for any selected X variant and for Y with nonmale founders, so it does not silently return a matrix that differs from PLINK 2.
+
+```R
+R_old <- pgen_cor("region.pgen", snp = old_ids, alt_A = target_alt, keep = "keep.txt")
+R_new <- pgen_cor_update(R_old, "region.pgen", snp = new_ids,
+                         alt_A = target_alt, keep = "keep.txt")
 ```
 
 ## Performance

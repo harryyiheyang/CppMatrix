@@ -12,15 +12,16 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // bed_cor_cpp
-Rcpp::NumericMatrix bed_cor_cpp(const std::string& A, const std::string& B, bool self);
-RcppExport SEXP _CppMatrix_bed_cor_cpp(SEXP ASEXP, SEXP BSEXP, SEXP selfSEXP) {
+Rcpp::NumericMatrix bed_cor_cpp(const std::string& A, const std::string& B, bool self, int threads);
+RcppExport SEXP _CppMatrix_bed_cor_cpp(SEXP ASEXP, SEXP BSEXP, SEXP selfSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::string& >::type A(ASEXP);
     Rcpp::traits::input_parameter< const std::string& >::type B(BSEXP);
     Rcpp::traits::input_parameter< bool >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(bed_cor_cpp(A, B, self));
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(bed_cor_cpp(A, B, self, threads));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -183,22 +184,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// pgen_pair_cor_cpp
-Rcpp::NumericMatrix pgen_pair_cor_cpp(const Rcpp::NumericMatrix& A, const Rcpp::NumericMatrix& B, bool self);
-RcppExport SEXP _CppMatrix_pgen_pair_cor_cpp(SEXP ASEXP, SEXP BSEXP, SEXP selfSEXP) {
+// pgen_cor_cpp
+Rcpp::NumericMatrix pgen_cor_cpp(const std::string& A, const std::string& B, bool self, int threads, int n_samples, int m_A, int m_B, const Rcpp::IntegerVector& allele_ct_A, const Rcpp::IntegerVector& allele_ct_B);
+RcppExport SEXP _CppMatrix_pgen_cor_cpp(SEXP ASEXP, SEXP BSEXP, SEXP selfSEXP, SEXP threadsSEXP, SEXP n_samplesSEXP, SEXP m_ASEXP, SEXP m_BSEXP, SEXP allele_ct_ASEXP, SEXP allele_ct_BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type A(ASEXP);
-    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type B(BSEXP);
     Rcpp::traits::input_parameter< bool >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(pgen_pair_cor_cpp(A, B, self));
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    Rcpp::traits::input_parameter< int >::type n_samples(n_samplesSEXP);
+    Rcpp::traits::input_parameter< int >::type m_A(m_ASEXP);
+    Rcpp::traits::input_parameter< int >::type m_B(m_BSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::IntegerVector& >::type allele_ct_A(allele_ct_ASEXP);
+    Rcpp::traits::input_parameter< const Rcpp::IntegerVector& >::type allele_ct_B(allele_ct_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(pgen_cor_cpp(A, B, self, threads, n_samples, m_A, m_B, allele_ct_A, allele_ct_B));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_CppMatrix_bed_cor_cpp", (DL_FUNC) &_CppMatrix_bed_cor_cpp, 3},
+    {"_CppMatrix_bed_cor_cpp", (DL_FUNC) &_CppMatrix_bed_cor_cpp, 4},
     {"_CppMatrix_matrixInverse_cpp", (DL_FUNC) &_CppMatrix_matrixInverse_cpp, 1},
     {"_CppMatrix_matrixMultiply_cpp", (DL_FUNC) &_CppMatrix_matrixMultiply_cpp, 4},
     {"_CppMatrix_matrixVectorMultiply_cpp", (DL_FUNC) &_CppMatrix_matrixVectorMultiply_cpp, 2},
@@ -212,7 +219,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_CppMatrix_matrixSVD_cpp", (DL_FUNC) &_CppMatrix_matrixSVD_cpp, 1},
     {"_CppMatrix_matrixSolveMat_cpp", (DL_FUNC) &_CppMatrix_matrixSolveMat_cpp, 2},
     {"_CppMatrix_matrixScale_cpp", (DL_FUNC) &_CppMatrix_matrixScale_cpp, 4},
-    {"_CppMatrix_pgen_pair_cor_cpp", (DL_FUNC) &_CppMatrix_pgen_pair_cor_cpp, 3},
+    {"_CppMatrix_pgen_cor_cpp", (DL_FUNC) &_CppMatrix_pgen_cor_cpp, 9},
     {NULL, NULL, 0}
 };
 

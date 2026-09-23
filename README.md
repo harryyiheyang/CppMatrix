@@ -23,8 +23,7 @@ The package includes the following matrix operation functions:
 - matrixScale: Centers and standardizes matrix columns, with an optional winsorized robust scale.
 - matrixCor: Computes the sample correlation matrix from a data matrix.
 - bed_cor: Computes variant correlations directly from PLINK BED files.
-- pgen_cor: Computes variant correlations directly from PLINK 2 PGEN files, with explicit ALT selection for multiallelic variants (requires `pgenlibr`).
-- pgen_cor_update: Extends an existing PGEN correlation matrix with new variants and restores chromosome-position order.
+- pgen_cor: Computes variant correlations directly from PLINK 2 PGEN files.
 - matrixEigen: Computes the eigenvalue decomposition of a symmetric matrix.
 - matrixSVD: Computes the singular values decomposition of a matrix.
 - matrixKronecker: Computes the Kronecker product of two matrices.
@@ -57,23 +56,33 @@ matrixScale(X)
 matrixScale(X, robust = TRUE)
 ```
 
-For genotype files that already contain the desired variants and samples, `bed_cor(A)` returns a variant-by-variant correlation matrix. `bed_cor(A, B)` returns the correlations between variants in `A` and `B`. Each BED file needs matching `.bim` and `.fam` files, and cross-file calls require identical samples in the same order.
+## Input requirements for `bed_cor()` and `pgen_cor()`
 
-```R
-Rkk <- Rold[keep, keep, drop = FALSE]
-Rka <- bed_cor("keep.bed", "add.bed")
-Raa <- bed_cor("add.bed")
-Rnew <- rbind(cbind(Rkk, Rka), cbind(t(Rka), Raa))
+Both functions compute signed correlations of **REF-allele dosages** over all samples and all variants in the given files. The package does not select samples or variants and never chooses or flips alleles, so prepare each file upstream: subset samples and variants, and make the allele that defines each variant's direction REF.
+
+```sh
+# BED (REF = BIM column 6, A2)
+plink2 --bfile in --extract snps.txt --keep samples.txt \
+  --ref-allele force target.txt 1 2 --make-bed --out out
+
+# PGEN (multiallelic variants allowed, e.g. an ALT2 as the target)
+plink2 --pfile in --extract snps.txt --keep samples.txt \
+  --ref-allele force target.txt 1 2 --make-pgen --out out
 ```
 
-`pgen_cor()` requires matching `.pvar` and `.psam` files. `keep` selects samples from a sample-ID file, and `snp` selects variants by ID (use `list(A = ..., B = ...)` for a cross matrix). Founders are used, and each pair is calculated over samples with both dosages observed, matching PLINK 2 `--r-unphased`. For a multiallelic variant, supply its target ALT string in `alt_A` or `alt_B`; these can be full-file vectors, vectors aligned with selected SNPs, or named by SNP ID. Biallelic variants default to ALT1. Both axes are sorted by chromosome, position, and SNP ID. Constant variants return `NA` correlations.
+`target.txt` has the allele to become REF in column 1 and the variant ID in column 2. For PGEN, the target becomes REF, the old REF becomes ALT1, and the remaining ALTs follow.
 
-PLINK 2 applies special sex-aware weighting to chromosome X. For now, `pgen_cor()` reports an error for any selected X variant and for Y with nonmale founders, so it does not silently return a matrix that differs from PLINK 2.
+- `A` and `B` must contain the same samples in the same order.
+- Missing calls are filled with each variant's median genotype; constant variants give `NA`.
+- Rows and columns follow the variant order in the `.bim` / `.pvar` files.
+- PGEN files must be hardcall-only with an uncompressed `.pvar` (`plink2 --make-pgen` output).
 
 ```R
-R_old <- pgen_cor("region.pgen", snp = old_ids, alt_A = target_alt, keep = "keep.txt")
-R_new <- pgen_cor_update(R_old, "region.pgen", snp = new_ids,
-                         alt_A = target_alt, keep = "keep.txt")
+R    <- bed_cor("gene.bed", threads = 16)           # or pgen_cor("gene.pgen")
+Rkk  <- Rold[keep, keep, drop = FALSE]
+Rka  <- bed_cor("keep.bed", "add.bed", threads = 16)
+Raa  <- bed_cor("add.bed", threads = 16)
+Rnew <- rbind(cbind(Rkk, Rka), cbind(t(Rka), Raa))
 ```
 
 ## Performance
@@ -82,7 +91,7 @@ The functions in this package are implemented using Rcpp and RcppArmadillo, whic
 
 ## License
 
-This package is licensed under the MIT License.
+This package is licensed under the MIT License, except `src/pgenlib/` (unmodified pgenlib sources from [plink-ng](https://github.com/chrchang/plink-ng) by Christopher Chang), which is LGPL (>= 3); `src/simde/` holds MIT-licensed SIMDe headers used on non-x86 platforms.
 
 ## Contact
 

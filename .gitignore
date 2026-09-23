@@ -7,3 +7,7 @@ src/*.so
 src/*.dll
 src/symbols.rds
 ..Rcheck/
+*.Rproj
+.Rbuildignore
+src/pgenlib/*.o
+src/*.a

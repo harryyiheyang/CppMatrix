@@ -2,7 +2,7 @@ Package: CppMatrix
 Type: Package
 Title: Efficient Matrix Operations using Rcpp and RcppArmadillo
 Version: 0.1.0
-Author: Yihe Yang
+Author: Yihe Yang, Christopher Chang [ctb, cph] (bundled pgenlib)
 Maintainer: Yihe Yang <yxy1234@case.edu>
 Description: The CppMatrixFunction package provides a collection of efficient matrix operation functions implemented using Rcpp and RcppArmadillo. These functions include matrix inversion, multiplication, matrix-vector multiplication, correlation matrix computation, eigenvalue decomposition, and Kronecker product. By leveraging the power of C++ and the Armadillo library, this package offers significant performance improvements compared to base R implementations, making it suitable for computationally intensive tasks involving large matrices.
 License: MIT + file LICENSE
@@ -15,11 +15,4 @@ Imports:
 LinkingTo:
     Rcpp,
     RcppArmadillo
-Suggests:
-    knitr,
-    pgenlibr,
-    rmarkdown,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-VignetteBuilder: knitr
 RoxygenNote: 7.3.3

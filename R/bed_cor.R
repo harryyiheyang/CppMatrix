@@ -1,23 +1,23 @@
-#' Correlation from PLINK BED files
-#'
-#' Calculates Pearson correlations between variants in SNP-major PLINK BED
-#' files. Genotypes count copies of BIM allele 1. Missing genotypes are replaced
-#' with their variant's observed mean, and variants with fewer than two observed
-#' calls or zero variance produce `NA` correlations. `A` and `B` must have the
-#' same FID/IID samples in the same order.
-#'
-#' @param A Path to a `.bed` file with matching `.bim` and `.fam` files.
-#' @param B Optional path to another `.bed` file with matching sidecars.
-#' @return A numeric matrix with A variants in rows and B variants in columns.
-#'   When `B` is `NULL`, returns the symmetric A-by-A correlation matrix.
-#' @export
-bed_cor <- function(A, B = NULL) {
-  if (!is.character(A) || length(A) != 1L || is.na(A) || !nzchar(A)) {
-    stop("A must be one BED file path.")
+# bed_cor(A, B = NULL, threads = 4L): signed correlations of REF (BIM A2)
+# dosages of all variants in BED A (x B); missing calls take the variant's
+# lower median. Files are prepared upstream (see README).
+bed_cor <- function(A, B = NULL, threads = 4L) {
+  A <- .bed_cor_path(A, "A")
+  if (!is.numeric(threads) || length(threads) != 1L || !is.finite(threads) ||
+      threads < 1 || threads != round(threads)) {
+    stop("threads must be a single positive integer.", call. = FALSE)
   }
+  threads <- as.integer(threads)
   self <- is.null(B)
-  if (!self && (!is.character(B) || length(B) != 1L || is.na(B) || !nzchar(B))) {
-    stop("B must be NULL or one BED file path.")
+  if (!self) B <- .bed_cor_path(B, "B")
+  bed_cor_cpp(A, if (self) A else B, self, threads)
+}
+
+.bed_cor_path <- function(x, arg) {
+  if (!is.character(x) || length(x) != 1L || is.na(x) || !nzchar(x)) {
+    stop(arg, " must be one BED file path.", call. = FALSE)
   }
-  bed_cor_cpp(A, if (self) A else B, self)
+  if (!grepl("\\.bed$", x)) x <- paste0(x, ".bed")
+  if (!file.exists(x)) stop("BED file not found: ", x, call. = FALSE)
+  normalizePath(x, winslash = "/")
 }

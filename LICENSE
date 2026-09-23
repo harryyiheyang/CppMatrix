@@ -1,2 +1,6 @@
 YEAR: 2026
 COPYRIGHT HOLDER: Yihe Yang
+
+src/pgenlib/ contains unmodified pgenlib sources from plink-ng (Christopher Chang), LGPL (>= 3).
+src/simde/ contains unmodified SIMDe headers (Evan Nemerson and contributors), MIT; see src/simde/COPYING.
+The rest of the package is MIT.

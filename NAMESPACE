@@ -1,3 +1,6 @@
 useDynLib("CppMatrix", .registration = TRUE)
 importFrom(Rcpp, sourceCpp)
 exportPattern("^[[:alpha:]]+$")
+export(bed_cor)
+export(pgen_cor)
+export(pgen_cor_update)

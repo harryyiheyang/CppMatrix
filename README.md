@@ -22,8 +22,6 @@ The package includes the following matrix operation functions:
 - matrixSolve: Solves a linear system AX = B and always treats B as a matrix.
 - matrixScale: Centers and standardizes matrix columns, with an optional winsorized robust scale.
 - matrixCor: Computes the sample correlation matrix from a data matrix.
-- bed_cor: Computes variant correlations directly from PLINK BED files.
-- pgen_cor: Computes variant correlations directly from PLINK 2 PGEN files.
 - matrixEigen: Computes the eigenvalue decomposition of a symmetric matrix.
 - matrixSVD: Computes the singular values decomposition of a matrix.
 - matrixKronecker: Computes the Kronecker product of two matrices.
@@ -56,34 +54,9 @@ matrixScale(X)
 matrixScale(X, robust = TRUE)
 ```
 
-## Input requirements for `bed_cor()` and `pgen_cor()`
+## Genotype files
 
-Both functions compute signed correlations of **REF-allele dosages** over all samples and all variants in the given files. The package does not select samples or variants and never chooses or flips alleles, so prepare each file upstream: subset samples and variants, and make the allele that defines each variant's direction REF.
-
-```sh
-# BED (REF = BIM column 6, A2)
-plink2 --bfile in --extract snps.txt --keep samples.txt \
-  --ref-allele force target.txt 1 2 --make-bed --out out
-
-# PGEN (multiallelic variants allowed, e.g. an ALT2 as the target)
-plink2 --pfile in --extract snps.txt --keep samples.txt \
-  --ref-allele force target.txt 1 2 --make-pgen --out out
-```
-
-`target.txt` has the allele to become REF in column 1 and the variant ID in column 2. For PGEN, the target becomes REF, the old REF becomes ALT1, and the remaining ALTs follow.
-
-- `A` and `B` must contain the same samples in the same order.
-- Missing calls are filled with each variant's median genotype; constant variants give `NA`.
-- Rows and columns follow the variant order in the `.bim` / `.pvar` files.
-- PGEN files must be hardcall-only with an uncompressed `.pvar` (`plink2 --make-pgen` output).
-
-```R
-R    <- bed_cor("gene.bed", threads = 16)           # or pgen_cor("gene.pgen")
-Rkk  <- Rold[keep, keep, drop = FALSE]
-Rka  <- bed_cor("keep.bed", "add.bed", threads = 16)
-Raa  <- bed_cor("add.bed", threads = 16)
-Rnew <- rbind(cbind(Rkk, Rka), cbind(t(Rka), Raa))
-```
+`bed_cor()` and `pgen_cor()` (variant correlations from PLINK BED / PGEN files, with the bundled pgenlib) moved to the plink4r package in CppMatrix 0.1.1, together with the 2-bit genotype store they use. CppMatrix now holds dense matrix routines only.
 
 ## Performance
 
@@ -91,7 +64,7 @@ The functions in this package are implemented using Rcpp and RcppArmadillo, whic
 
 ## License
 
-This package is licensed under the MIT License, except `src/pgenlib/` (unmodified pgenlib sources from [plink-ng](https://github.com/chrchang/plink-ng) by Christopher Chang), which is LGPL (>= 3); `src/simde/` holds MIT-licensed SIMDe headers used on non-x86 platforms.
+This package is licensed under the MIT License.
 
 ## Contact
 
